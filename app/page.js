@@ -1,3 +1,4 @@
+import Link from "next/link";
 import SearchForm from "@/components/SearchForm";
 import LeadForm from "@/components/LeadForm";
 import TourCard from "@/components/TourCard";
@@ -24,12 +25,12 @@ export default function Home() {
           <h2>Популярные направления</h2>
           <div className="grid">
             {destinations.map((d) => (
-              <a href="#lead" key={d.slug} className="dest" style={{ background: `linear-gradient(135deg, ${d.color}, #1e3799)` }}>
+              <Link href={`/destinations/${d.slug}`} key={d.slug} className="dest" style={{ background: `linear-gradient(135deg, ${d.color}, #1e3799)` }}>
                 <span className="em">{d.emoji}</span>
                 <h3>{d.name}</h3>
                 <p>{d.text}</p>
                 <b>от {fmt(d.from)}</b>
-              </a>
+              </Link>
             ))}
           </div>
         </div>

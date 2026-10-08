@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { fmt } from "@/lib/data";
 
 export default function TourCard({ t }) {
@@ -13,7 +14,7 @@ export default function TourCard({ t }) {
         <p className="muted">{t.country}, {t.resort} · {"★".repeat(t.stars)}</p>
         <p>{t.date} · {t.nights} ночей · {t.meal}</p>
         <div className="price"><b>{fmt(t.price)}</b><s>{fmt(t.old)}</s></div>
-        <a href="#lead" className="btn">Забронировать</a>
+        <Link href={`/tours/${t.id}`} className="btn">Подробнее</Link>
       </div>
     </article>
   );

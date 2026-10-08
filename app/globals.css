@@ -54,3 +54,6 @@ button:hover, .btn:hover { filter: brightness(1.08); }
   .phone { margin-left: auto; }
 }
 @media (max-width: 560px) { .grid, .grid.four { grid-template-columns: 1fr; } }
+.err { color: #d63031; font-weight: 600; }
+.facts { list-style: none; margin-top: 16px; display: grid; gap: 8px; font-size: 18px; }
+button:disabled { opacity: .6; cursor: wait; }
