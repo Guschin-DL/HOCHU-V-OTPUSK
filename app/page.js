@@ -2,7 +2,7 @@ import Link from "next/link";
 import SearchForm from "@/components/SearchForm";
 import LeadForm from "@/components/LeadForm";
 import TourCard from "@/components/TourCard";
-import { destinations, hotTours, benefits, reviews, fmt } from "@/lib/data";
+import { destinations, hotTours, benefits, reviews, stats, steps, fmt } from "@/lib/data";
 
 export default function Home() {
   return (
@@ -13,6 +13,15 @@ export default function Home() {
           <p>Подберём тур мечты под ваш бюджет — быстро и без переплат</p>
           <SearchForm />
         </div>
+        <svg className="waves" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0,64 C240,120 480,0 720,48 C960,96 1200,16 1440,64 L1440,120 L0,120 Z" fill="#fff7ec" />
+        </svg>
+      </section>
+
+      <section className="container stats">
+        {stats.map((s) => (
+          <div key={s.label}><b>{s.value}</b><span>{s.label}</span></div>
+        ))}
       </section>
 
       <section id="hot" className="section container">
@@ -47,6 +56,15 @@ export default function Home() {
             </div>
           ))}
         </div>
+      </section>
+
+      <section className="section container">
+        <h2>Как это работает</h2>
+        <ol className="steps">
+          {steps.map((st, i) => (
+            <li key={st.title}><span className="num">{i + 1}</span><h3>{st.title}</h3><p>{st.text}</p></li>
+          ))}
+        </ol>
       </section>
 
       <section id="reviews" className="section alt">
