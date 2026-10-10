@@ -1,4 +1,4 @@
-export const metadata = { title: "Логотип — Хочу в отпуск", robots: { index: false } };
+export const metadata = { title: "Логотип — Хочу на отдых", robots: { index: false } };
 
 const main = [
   { file: "v3-main", name: "Горизонтальный", note: "Основной знак: шапка сайта, письма, баннеры. Надпись читается от 150 px по ширине, подпись — от 320 px.", bg: "light" },
@@ -20,7 +20,7 @@ export default function Brand() {
       <section className="page-hero">
         <div className="container">
           <span className="eyebrow light">Фирменный стиль</span>
-          <h1>Логотип «Хочу в отпуск»</h1>
+          <h1>Логотип «Хочу на отдых»</h1>
           <p>Семья котов выглядывает из-за дюны и подсматривает за улетающим самолётом: вся семья в ожидании отпуска.</p>
         </div>
       </section>
