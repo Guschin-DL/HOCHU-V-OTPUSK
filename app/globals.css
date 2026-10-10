@@ -300,3 +300,13 @@ button:disabled { opacity: .6; cursor: wait; }
 .brand-view.v2 .bv.light { background: #fbf5ea; padding: 32px; }
 .covers { list-style: none; display: grid; gap: 2px; font-size: 14px; margin: 4px 0; }
 @media (max-width: 960px) { .brand-row.v2 { grid-template-columns: 1fr; } }
+.main-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.mg { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column; }
+.mg.wide { grid-column: 1 / -1; }
+.mg .bv { border-radius: 0; padding: 36px; min-height: 240px; }
+.mg.wide .bv { padding: 48px; }
+.mg .bv.light { background: #fbf5ea; }
+.mg-txt { padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 6px; }
+.mg-txt h3 { font-size: 20px; color: var(--deep); }
+.mg .bv img { max-width: 100%; max-height: 360px; width: auto; }
+@media (max-width: 760px) { .main-grid { grid-template-columns: 1fr; } }

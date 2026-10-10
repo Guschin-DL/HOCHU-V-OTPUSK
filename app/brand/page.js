@@ -1,30 +1,17 @@
 export const metadata = { title: "Логотип — Хочу в отпуск", robots: { index: false } };
 
-const variants = [
-  {
-    n: 1, file: "v2-a-cats", name: "Семья котов смотрит на самолёт", pick: "Рекомендуем как основной",
-    idea: "Круглая эмблема: три кота разного размера, как семья, смотрят вверх на самолёт на фоне солнца. Котёнок в очках отдыхает.",
-    covers: { "Направление и место": "море, пальма, пляж", "Действие": "самолёт над солнцем", "Семья": "три кота разного размера", "Релакс": "очки и пляж", "Мечта": "взгляд вверх" },
-    size: "Надпись читается от 150 px по ширине, подпись «для всей семьи» — от 320 px; эмблема отдельно — от 48 px",
-  },
-  {
-    n: 2, file: "v2-b-sign", name: "Указатель направлений", 
-    idea: "Столб с тремя табличками: горы, пляж и самолёт. Человек выбирает, куда поехать.",
-    covers: { "Направление и место": "таблички с горами и пляжем", "Действие": "самолёт на нижней табличке", "Семья": "в подписи", "Релакс": "пляж и пальма", "Мечта": "выбор маршрута" },
-    size: "Читается от 150 px по ширине; подпись — от 320 px",
-  },
-  {
-    n: 3, file: "v2-c-sunset", name: "Закат и семья пальм",
-    idea: "Ретро-эмблема из мазков кисти: три пальмы разного роста на острове, солнце и самолёт.",
-    covers: { "Направление и место": "остров, закат", "Действие": "самолёт в небе", "Семья": "три пальмы", "Релакс": "тёплые цвета заката", "Мечта": "остров на горизонте" },
-    size: "Эмблема с надписью — от 110 px по ширине; подпись — от 160 px",
-  },
-  {
-    n: 4, file: "v2-d-word", name: "Надпись с пальмой и самолётом",
-    idea: "Компактная тяжёлая надпись в два цвета: пальма растёт на «ч», самолёт вылетает из слова.",
-    covers: { "Направление и место": "пальма на «ч»", "Действие": "самолёт и пунктир маршрута", "Семья": "—", "Релакс": "—", "Мечта": "полёт вперёд" },
-    size: "Читается от 120 px по ширине; самолёт и пальма видны от 170 px. Годится для шапки сайта",
-  },
+const main = [
+  { file: "v3-main", name: "Горизонтальный", note: "Основной знак: шапка сайта, письма, баннеры. Надпись читается от 150 px по ширине, подпись — от 320 px.", bg: "light" },
+  { file: "v3-main-dark", name: "Для тёмного фона", note: "Светлое кольцо и надпись. Для футера, тёмных баннеров и презентаций.", bg: "dark" },
+  { file: "v3-stacked", name: "Вертикальный", note: "Для квадратных мест: соцсети, афиши, визитки.", bg: "light" },
+  { file: "v3-emblem", name: "Эмблема", note: "Без надписи: аватар, стикер, печать. Читается от 48 px.", bg: "light" },
+  { file: "v3-icon", name: "Иконка 32×32", note: "Кот и самолёт для вкладки браузера и приложений. Упрощена: без пальмы и моря.", bg: "light" },
+];
+
+const others = [
+  { file: "v2-b-sign", name: "Указатель направлений", idea: "Столб с тремя табличками: горы, пляж, самолёт. Читается от 150 px." },
+  { file: "v2-c-sunset", name: "Закат и семья пальм", idea: "Ретро-эмблема из мазков кисти: три пальмы как семья. Читается от 110 px." },
+  { file: "v2-d-word", name: "Надпись с пальмой и самолётом", idea: "Компактная надпись для шапки: пальма на «ч», самолёт вылетает из слова. Читается от 120 px." },
 ];
 
 export default function Brand() {
@@ -34,29 +21,30 @@ export default function Brand() {
         <div className="container">
           <span className="eyebrow light">Фирменный стиль</span>
           <h1>Логотип «Хочу в отпуск»</h1>
-          <p>Четыре концепции по вашим референсам и брифу: направление и место, самолёт, семья, релакс, мечта. Все файлы векторные (SVG), буквы в контурах.</p>
+          <p>Семья котов выглядывает из-за дюны и подсматривает за улетающим самолётом: вся семья в ожидании отпуска.</p>
         </div>
       </section>
+
       <section className="section container brand">
-        {variants.map((v) => (
-          <article key={v.n} className="brand-row v2">
-            <div className="brand-txt">
-              <span className="num">{v.n}</span>
-              <h2>{v.name}</h2>
-              <p>{v.idea}</p>
-              {v.pick && <span className="pilot">{v.pick}</span>}
-              <ul className="covers">
-                {Object.entries(v.covers).filter(([, t]) => t !== "—").map(([k, t]) => <li key={k}><b>{k}:</b> {t}</li>)}
-              </ul>
-              <p className="muted"><b>Минимальный размер:</b> {v.size}</p>
-              <a className="more" href={`/logo/${v.file}.svg`} download>Скачать SVG →</a>
-            </div>
-            <div className="brand-view v2">
+        <div className="sec-head"><span className="eyebrow">Основной</span><h2>Семья ждёт отпуск</h2></div>
+        <div className="main-grid">
+          {main.map((v, i) => (
+            <article key={v.file} className={`mg ${i === 0 ? "wide" : ""}`}>
+              <div className={`bv ${v.bg}`}><img src={`/logo/${v.file}.svg`} alt={v.name} style={v.file === "v3-icon" ? { width: 96 } : undefined} /></div>
+              <div className="mg-txt"><h3>{v.name}</h3><p className="muted">{v.note}</p><a className="more" href={`/logo/${v.file}.svg`} download>Скачать SVG →</a></div>
+            </article>
+          ))}
+        </div>
+
+        <div className="sec-head" style={{ marginTop: 56 }}><span className="eyebrow">Запасные направления</span><h2>Другие концепции</h2></div>
+        <div className="grid">
+          {others.map((v) => (
+            <article key={v.file} className="mg">
               <div className="bv light"><img src={`/logo/${v.file}.svg`} alt={v.name} /></div>
-              <div className="bv small"><img src={`/logo/${v.file}.svg`} alt="" style={{ height: 44 }} /><span className="muted">шапка сайта</span></div>
-            </div>
-          </article>
-        ))}
+              <div className="mg-txt"><h3>{v.name}</h3><p className="muted">{v.idea}</p><a className="more" href={`/logo/${v.file}.svg`} download>Скачать SVG →</a></div>
+            </article>
+          ))}
+        </div>
       </section>
     </>
   );
