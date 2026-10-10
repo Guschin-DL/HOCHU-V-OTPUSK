@@ -295,3 +295,8 @@ button:disabled { opacity: .6; cursor: wait; }
 .bv.mono { background: #fff; border: 2px solid #ece3d3; }
 .bv.small { grid-column: 1 / -1; background: #fff; border: 2px dashed #e6ddd0; gap: 16px; justify-content: flex-start; }
 @media (max-width: 960px) { .brand-row { grid-template-columns: 1fr; } .brand-view { grid-template-columns: 1fr; } }
+.brand-row.v2 { grid-template-columns: 360px 1fr; }
+.brand-view.v2 { grid-template-columns: 1fr; }
+.brand-view.v2 .bv.light { background: #fbf5ea; padding: 32px; }
+.covers { list-style: none; display: grid; gap: 2px; font-size: 14px; margin: 4px 0; }
+@media (max-width: 960px) { .brand-row.v2 { grid-template-columns: 1fr; } }
