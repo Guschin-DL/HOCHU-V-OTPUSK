@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 748 240" width="748" height="240" role="img" aria-label="Хочу в отпуск — чемодан с закатом"><title>Хочу в отпуск — чемодан с закатом</title><rect x="20" y="40" width="708" height="160" rx="32" fill="#fbf5ea" stroke="#0b3b4a" stroke-width="5"/>
     <defs><clipPath id="b"><rect x="58" y="92" width="112" height="86" rx="16"/></clipPath></defs>
     <path d="M96 92V78a9 9 0 0 1 9-9h26a9 9 0 0 1 9 9V92" fill="none" stroke="#0b3b4a" stroke-width="9" stroke-linecap="round"/>
-    <rect x="58" y="92" width="112" height="86" rx="16" fill="#ff7a59"/>
+    <rect x="58" y="92" width="112" height="86" rx="16" fill="#0b3b4a"/>
     <g clip-path="url(#b)"><rect x="58" y="136" width="112" height="42" fill="#0b3b4a"/><circle cx="114" cy="136" r="24" fill="#fbf5ea"/>
     <path d="M58 150q14-9 28 0t28 0t28 0t28 0" fill="none" stroke="#fbf5ea" stroke-width="5" stroke-linecap="round"/>
     <path d="M58 166q14-9 28 0t28 0t28 0t28 0" fill="none" stroke="#fbf5ea" stroke-width="5" stroke-linecap="round" opacity=".5"/></g>
