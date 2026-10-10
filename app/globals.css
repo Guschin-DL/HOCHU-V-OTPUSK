@@ -1,7 +1,7 @@
 :root {
   --deep:#0b3b4a; --sea:#14697f; --lagoon:#1f9e89; --coral:#ff7a59; --sun:#ffd166; --sand:#fbf5ea; --paper:#fff; --ink:#15303a; --muted:#6b7f87;
   --radius:24px; --shadow:0 14px 40px rgba(11,59,74,.14);
-  --serif:"Fraunces", Georgia, "Times New Roman", serif; --sans:"Manrope", "Segoe UI", system-ui, sans-serif;
+  --serif:"Playfair Display", Georgia, "Times New Roman", serif; --sans:"Manrope", "Segoe UI", system-ui, sans-serif;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; scroll-padding-top: 80px; }
@@ -281,3 +281,16 @@ button:disabled { opacity: .6; cursor: wait; }
   .hotel-hero-in { grid-template-columns: 1fr; }
   .hotel-logo.big { max-width: 240px; order: -1; }
 }
+
+/* бренд-страница */
+.brand { display: grid; gap: 28px; }
+.brand-row { display: grid; grid-template-columns: 340px 1fr; gap: 32px; background: #fff; border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); align-items: center; }
+.brand-txt { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.brand-txt h2 { font-size: 26px; }
+.brand-view { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.bv { border-radius: 16px; padding: 22px; display: flex; align-items: center; justify-content: center; }
+.bv img { max-width: 100%; height: auto; display: block; }
+.bv.light { background: #f1ede4; }
+.bv.dark { background: #0a2530; }
+.bv.small { grid-column: 1 / -1; background: #fff; border: 2px dashed #e6ddd0; gap: 16px; justify-content: flex-start; }
+@media (max-width: 960px) { .brand-row { grid-template-columns: 1fr; } .brand-view { grid-template-columns: 1fr; } }
