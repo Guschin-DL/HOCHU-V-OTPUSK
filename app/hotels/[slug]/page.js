@@ -10,7 +10,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const h = hotels.find((x) => x.slug === slug);
-  return { title: h ? `${h.type} ${h.name}, ${h.place} — Хочу в отпуск` : "Не найдено", description: h?.tagline };
+  return { title: h ? `${h.type} ${h.name}, ${h.place} — Хочу на отдых` : "Не найдено", description: h?.tagline };
 }
 
 export default async function HotelPage({ params }) {

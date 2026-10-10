@@ -11,7 +11,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const d = destinations.find((x) => x.slug === slug);
-  return { title: d ? `Туры: ${d.name} — Хочу в отпуск` : "Не найдено" };
+  return { title: d ? `Туры: ${d.name} — Хочу на отдых` : "Не найдено" };
 }
 
 export default async function DestinationPage({ params }) {

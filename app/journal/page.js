@@ -1,7 +1,7 @@
 import JournalList from "@/components/JournalList";
 import LeadForm from "@/components/LeadForm";
 
-export const metadata = { title: "Журнал — Хочу в отпуск", description: "Маршруты, еда, советы и идеи для отпуска." };
+export const metadata = { title: "Журнал — Хочу на отдых", description: "Маршруты, еда, советы и идеи для отдыха." };
 
 export default function Journal() {
   return (

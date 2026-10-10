@@ -20,7 +20,7 @@ export default function Home() {
         <div className="container hero-in">
           <div className="hero-copy">
             <span className="pill-rate"><b>4,9 ★</b> 2 300+ отзывов путешественников</span>
-            <h1>Отпуск, который <em>хочется</em> повторить</h1>
+            <h1>Отдых, который <em>хочется</em> повторить</h1>
             <p>Подбираем туры без переплат за 15 минут — и рассказываем, куда поехать, в журнале для тех, кто любит путешествовать.</p>
             <SearchForm />
             <div className="cats">

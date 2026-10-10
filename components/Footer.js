@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="container foot-grid">
         <div>
-          <b className="foot-logo">Хочу в отпуск</b>
+          <b className="foot-logo">Хочу на отдых</b>
           <p>Подбираем туры без переплат и пишем о местах, куда хочется вернуться.</p>
         </div>
         <div>
@@ -22,7 +22,7 @@ export default function Footer() {
           <span>Ежедневно, 9:00–21:00</span>
         </div>
       </div>
-      <div className="container foot-bottom">© {new Date().getFullYear()} Хочу в отпуск. Все права защищены.</div>
+      <div className="container foot-bottom">© {new Date().getFullYear()} Хочу на отдых. Все права защищены.</div>
     </footer>
   );
 }

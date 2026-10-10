@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "Хочу в отпуск — туры и журнал путешествий",
+  title: "Хочу на отдых — туры и журнал путешествий",
   description: "Горящие туры, отдых в Абхазии и по миру, журнал путешественников. Подбор за 15 минут.",
 };
 

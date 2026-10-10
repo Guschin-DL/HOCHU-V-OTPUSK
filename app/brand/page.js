@@ -21,12 +21,12 @@ export default function Brand() {
         <div className="container">
           <span className="eyebrow light">Фирменный стиль</span>
           <h1>Логотип «Хочу на отдых»</h1>
-          <p>Семья котов выглядывает из-за дюны и подсматривает за улетающим самолётом: вся семья в ожидании отпуска.</p>
+          <p>Семья котов выглядывает из-за дюны и подсматривает за улетающим самолётом: вся семья в ожидании отдыха.</p>
         </div>
       </section>
 
       <section className="section container brand">
-        <div className="sec-head"><span className="eyebrow">Основной</span><h2>Семья ждёт отпуск</h2></div>
+        <div className="sec-head"><span className="eyebrow">Основной</span><h2>Семья ждёт отдых</h2></div>
         <div className="main-grid">
           {main.map((v, i) => (
             <article key={v.file} className={`mg ${i === 0 ? "wide" : ""}`}>

@@ -2,7 +2,7 @@ import HotelCard from "@/components/HotelCard";
 import LeadForm from "@/components/LeadForm";
 import { hotels } from "@/lib/data";
 
-export const metadata = { title: "Каталог отелей — Хочу в отпуск", description: "Проверенные отели и мини-отели наших партнёров. Пилотный партнёр — Гринвуд СПА, Пицунда." };
+export const metadata = { title: "Каталог отелей — Хочу на отдых", description: "Проверенные отели и мини-отели наших партнёров. Пилотный партнёр — Гринвуд СПА, Пицунда." };
 
 export default function Hotels() {
   return (
@@ -11,7 +11,7 @@ export default function Hotels() {
         <div className="container">
           <span className="eyebrow light">Каталог отелей</span>
           <h1>Отели, в которых мы уверены</h1>
-          <p>Каталог «Хочу в отпуск» запускается с пилотного партнёра. Каждый отель добавляем после знакомства и проверки.</p>
+          <p>Каталог «Хочу на отдых» запускается с пилотного партнёра. Каждый отель добавляем после знакомства и проверки.</p>
         </div>
       </section>
       <section className="section container">
