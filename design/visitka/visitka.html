@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><title>Визитка</title>
+<style>
+@page{size:96.4mm 56.2mm;margin:0}
+*{box-sizing:border-box;margin:0}
+html,body{width:96.4mm;background:#fbf5ea;font-family:Inter,'Liberation Sans',sans-serif}
+.card{width:96.4mm;height:56.2mm;position:relative;overflow:hidden;page-break-after:always}
+/* размер 90x50 мм + вылеты 3 мм со всех сторон */
+.front{background:#fbf5ea;display:flex;align-items:center;justify-content:center}
+.front img{width:84mm;height:auto;display:block}
+.back{background:#0f3b4c;color:#fbf5ea;padding:9mm 9mm;display:flex;flex-direction:column;justify-content:space-between}
+.back:before{content:"";position:absolute;right:-16mm;top:-16mm;width:36mm;height:36mm;border-radius:50%;background:#ff7a3d;opacity:.95}
+.back:after{content:"";position:absolute;right:-9mm;top:-9mm;width:22mm;height:22mm;border-radius:50%;background:#fbd9a8;opacity:.9}
+.tag{position:relative;z-index:1;font-weight:800;font-size:3.9mm;line-height:1.15;white-space:nowrap;color:#fbf5ea}
+.tag b{color:#ff7a3d;font-weight:800}
+.mid{position:relative;z-index:1}
+.phone{font-weight:800;font-size:6.6mm;color:#ff7a3d;letter-spacing:.2mm;white-space:nowrap}
+.site{margin-top:1.6mm;font-weight:700;font-size:4.2mm;color:#2eb5b8;letter-spacing:.1mm}
+.foot{position:relative;z-index:1;font-size:2.6mm;letter-spacing:.7mm;font-weight:600;color:#fbf5ea;opacity:.8;text-transform:uppercase}
+</style></head><body>
+<section class="card front"><img src="logo.png" alt="Хочу на отдых"></section>
+<section class="card back">
+  <div class="tag">Пусть <b>папа</b> и <b>мама</b> знают</div>
+  <div class="mid">
+    <div class="phone">+7 (965) 2000-701</div>
+    <div class="site">хочунаотдых.рф</div>
+  </div>
+  <div class="foot">Туры для всей семьи</div>
+</section>
+</body></html>
