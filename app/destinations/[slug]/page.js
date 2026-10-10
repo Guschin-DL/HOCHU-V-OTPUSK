@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import TourCard from "@/components/TourCard";
+import Scene from "@/components/Scene";
 import LeadForm from "@/components/LeadForm";
 import { destinations, hotTours, fmt } from "@/lib/data";
 
@@ -20,9 +21,10 @@ export default async function DestinationPage({ params }) {
   const tours = hotTours.filter((t) => t.country === d.name);
   return (
     <>
-      <section className="hero" style={{ background: `linear-gradient(160deg, ${d.color}, #1e3799)` }}>
+      <section className="page-hero scenic">
+        <Scene kind={d.kind} c1={d.color} c2={d.c2} />
         <div className="container">
-          <span className="em">{d.emoji}</span>
+          <span className="eyebrow">Направление</span>
           <h1>Туры: {d.name}</h1>
           <p>{d.text} Цены от {fmt(d.from)}</p>
         </div>
