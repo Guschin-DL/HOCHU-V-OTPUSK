@@ -4,27 +4,19 @@
 @page{size:96.4mm 56.2mm;margin:0}
 *{box-sizing:border-box;margin:0}
 html,body{width:96.4mm;background:#fbf5ea;font-family:Inter,'Liberation Sans',sans-serif}
-.card{width:96.4mm;height:56.2mm;position:relative;overflow:hidden;page-break-after:always}
-/* размер 90x50 мм + вылеты 3 мм со всех сторон */
-.front{background:#fbf5ea;display:flex;align-items:center;justify-content:center}
-.front img{width:84mm;height:auto;display:block}
-.back{background:#0f3b4c;color:#fbf5ea;padding:9mm 9mm;display:flex;flex-direction:column;justify-content:space-between}
-.back:before{content:"";position:absolute;right:-16mm;top:-16mm;width:36mm;height:36mm;border-radius:50%;background:#ff7a3d;opacity:.95}
-.back:after{content:"";position:absolute;right:-9mm;top:-9mm;width:22mm;height:22mm;border-radius:50%;background:#fbd9a8;opacity:.9}
-.tag{position:relative;z-index:1;font-weight:800;font-size:3.9mm;line-height:1.15;white-space:nowrap;color:#fbf5ea}
+/* 90x50 мм + вылеты 3 мм; логотип 88 мм шириной (1 px = 0.08 мм) */
+.card{width:96.4mm;height:56.2mm;position:relative;overflow:hidden;background:#fbf5ea}
+.card img{position:absolute;left:4.2mm;top:5.8mm;width:88mm;display:block}
+.t{position:absolute;left:50.6mm;white-space:nowrap}
+.tag{top:6.2mm;font-weight:800;font-size:4.3mm;line-height:1.18;color:#0f3b4c}
 .tag b{color:#ff7a3d;font-weight:800}
-.mid{position:relative;z-index:1}
-.phone{font-weight:800;font-size:6.6mm;color:#ff7a3d;letter-spacing:.2mm;white-space:nowrap}
-.site{margin-top:1.6mm;font-weight:700;font-size:4.2mm;color:#2eb5b8;letter-spacing:.1mm}
-.foot{position:relative;z-index:1;font-size:2.6mm;letter-spacing:.7mm;font-weight:600;color:#fbf5ea;opacity:.8;text-transform:uppercase}
+.phone{top:41.6mm;font-weight:800;font-size:3.75mm;color:#ff7a3d}
+.site{top:46.4mm;font-weight:700;font-size:3.6mm;color:#2eb5b8}
 </style></head><body>
-<section class="card front"><img src="logo.png" alt="Хочу на отдых"></section>
-<section class="card back">
-  <div class="tag">Пусть <b>папа</b> и <b>мама</b> знают</div>
-  <div class="mid">
-    <div class="phone">+7 (965) 2000-701</div>
-    <div class="site">хочунаотдых.рф</div>
-  </div>
-  <div class="foot">Туры для всей семьи</div>
+<section class="card">
+  <img src="logo.png" alt="Хочу на отдых">
+  <div class="t tag">Пусть <b>папа</b> и <b>мама</b><br>знают</div>
+  <div class="t phone">+7 (965) 2000-701</div>
+  <div class="t site">хочунаотдых.рф</div>
 </section>
 </body></html>
