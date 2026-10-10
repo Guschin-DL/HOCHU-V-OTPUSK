@@ -26,18 +26,21 @@ export default function HeroArt() {
         </linearGradient>
       </defs>
       <rect width="1440" height="900" fill="url(#sky)" />
-      <circle cx="1110" cy="650" r="340" fill="url(#glow)" />
-      <circle cx="1110" cy="650" r="92" fill="#ff7a3d" />
+      <circle cx="1110" cy="636" r="340" fill="url(#glow)" />
+      <circle cx="1110" cy="636" r="150" fill="#ff7a3d" />
       <path d="M0 610 L120 520 L230 585 L380 470 L520 590 L640 540 L760 610 L900 560 L1040 620 L1200 540 L1330 600 L1440 560 V700 H0Z" fill="#2bb3b5" opacity=".3" />
       <path d="M0 650 L90 590 L200 640 L330 540 L470 650 L560 610 L700 670 L820 640 V720 H0Z" fill="#2bb3b5" opacity=".55" />
       <path d="M1000 690 L1130 610 L1220 660 L1330 590 L1440 640 V720 H1000Z" fill="#17808a" opacity=".85" />
       <rect y="640" width="1440" height="260" fill="url(#sea)" />
       <g stroke="#ffe6b8" strokeLinecap="round" opacity=".75">
-        {[[1110,664,170],[1110,686,126],[1110,710,92],[1110,736,64],[1110,764,40]].map(([x,y,w],i)=><line key={i} x1={x-w/2} x2={x+w/2} y1={y} y2={y} strokeWidth={4-i*.5} />)}
+        {[[1110,782,230],[1110,804,170],[1110,828,120],[1110,854,80],[1110,882,48]].map(([x,y,w],i)=><line key={i} x1={x-w/2} x2={x+w/2} y1={y} y2={y} strokeWidth={4-i*.5} />)}
       </g>
       {wave(740, .5, 14)}
       {wave(800, .75, 10)}
       {wave(860, 1, 7)}
+      <g className="hero-emblem">
+        <image href="/logo/v3-emblem.svg" x="992" y="518" width="236" height="236" style={{ filter: "drop-shadow(0 14px 22px rgba(11,59,74,.35))" }} />
+      </g>
       <g stroke="#0b3b4a" strokeLinecap="round" fill="none">
         <path d="M150 900 Q170 760 140 640" strokeWidth="9" />
         <path d="M140 640 Q80 600 20 640 M140 640 Q100 570 40 560 M140 640 Q190 580 250 590 M140 640 Q180 560 250 520 M140 640 Q150 570 160 520" strokeWidth="7" />

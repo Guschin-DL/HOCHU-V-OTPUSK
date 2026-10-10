@@ -26,6 +26,7 @@ export default function Home() {
             <div className="cats">
               {cats.map(([href, label]) => <Link key={label} href={href} className="cat">{label}</Link>)}
             </div>
+            <div className="hero-logo-m"><img src="/logo/v3-emblem.svg" alt="Хочу на отдых: семья котов смотрит на самолёт" width="180" height="180" /></div>
           </div>
           <aside className="hero-float" aria-label="Выгодное предложение">
             <Link href="/tours/7" className="glass">

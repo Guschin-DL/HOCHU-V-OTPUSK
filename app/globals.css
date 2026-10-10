@@ -30,6 +30,8 @@ h1, h2, h3 { font-family: var(--serif); line-height: 1.12; font-weight: 800; let
 .hero { position: relative; color: var(--deep); min-height: 100svh; display: flex; align-items: center; padding: 120px 0 150px; overflow: hidden; background: var(--sky); }
 .hero-art { position: absolute; inset: 0; width: 100%; height: 100%; }
 .hero-art .wv { animation: drift linear infinite; }
+.hero-emblem { animation: bob 7s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.hero-logo-m { display: none; }
 @keyframes drift { to { transform: translateX(-360px); } }
 .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 80%, var(--sand)); pointer-events: none; }
 .hero-in > * { min-width: 0; }
@@ -215,6 +217,9 @@ button:disabled { opacity: .6; cursor: wait; }
 .foot-bottom { margin-top: 36px; padding-top: 18px; border-top: 1px solid rgba(11,59,74,.15); font-size: 13px; }
 
 @media (max-width: 960px) {
+  .hero-emblem { display: none; }
+  .hero-logo-m { display: flex; justify-content: center; margin-top: 26px; padding: 18px 0 6px; background: radial-gradient(circle at 50% 55%, rgba(255,122,61,.38) 0 34%, rgba(255,176,46,.18) 52%, transparent 68%); }
+  .hero-logo-m img { width: 180px; height: 180px; filter: drop-shadow(0 12px 18px rgba(11,59,74,.3)); }
   .hero-in { grid-template-columns: 1fr; }
   .hero-float { display: none; }
   .stats { grid-template-columns: 1fr 1fr; row-gap: 28px; }
@@ -247,7 +252,7 @@ button:disabled { opacity: .6; cursor: wait; }
   .journal-side .art-body p { display: block; }
 }
 
-@media (prefers-reduced-motion: reduce) { .marquee-track, .hero-art .wv, .glass, .live i, .scroll-cue i { animation: none; } .reveal { opacity: 1; transform: none; } html { scroll-behavior: auto; } }
+@media (prefers-reduced-motion: reduce) { .marquee-track, .hero-art .wv, .hero-emblem, .glass, .live i, .scroll-cue i { animation: none; } .reveal { opacity: 1; transform: none; } html { scroll-behavior: auto; } }
 
 /* каталог отелей */
 .hotel-list { display: grid; gap: 24px; }
