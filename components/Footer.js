@@ -12,6 +12,7 @@ export default function Footer() {
           <h4>Разделы</h4>
           <Link href="/#hot">Горящие туры</Link>
           <Link href="/#destinations">Направления</Link>
+          <Link href="/hotels">Каталог отелей</Link>
           <Link href="/journal">Журнал</Link>
         </div>
         <div>

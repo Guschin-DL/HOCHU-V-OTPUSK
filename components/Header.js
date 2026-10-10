@@ -1,10 +1,12 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
 const links = [
   ["/#hot", "Горящие туры"],
   ["/#destinations", "Направления"],
+  ["/hotels", "Каталог отелей"],
   ["/journal", "Журнал"],
   ["/#why", "О нас"],
   ["/#reviews", "Отзывы"],
@@ -13,6 +15,7 @@ const links = [
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
+  const light = usePathname().startsWith("/hotels/");
   useEffect(() => {
     const on = () => setSolid(window.scrollY > 24);
     on();
@@ -20,7 +23,7 @@ export default function Header() {
     return () => window.removeEventListener("scroll", on);
   }, []);
   return (
-    <header className={`header ${solid ? "solid" : ""} ${open ? "open" : ""}`}>
+    <header className={`header ${solid || light ? "solid" : ""} ${open ? "open" : ""}`}>
       <div className="container header-in">
         <Link href="/" className="logo" onClick={() => setOpen(false)}>
           <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#ff7a59" /><path d="M5 21q5.5-6 11 0t11 0" stroke="#fff" strokeWidth="2.4" fill="none" strokeLinecap="round" /><circle cx="21" cy="11" r="3.4" fill="#ffd166" /></svg>

@@ -246,3 +246,38 @@ button:disabled { opacity: .6; cursor: wait; }
 }
 
 @media (prefers-reduced-motion: reduce) { .marquee-track, .hero-art .wv, .glass, .live i, .scroll-cue i { animation: none; } .reveal { opacity: 1; transform: none; } html { scroll-behavior: auto; } }
+
+/* каталог отелей */
+.hotel-list { display: grid; gap: 24px; }
+.hotel-card { display: grid; grid-template-columns: 200px 1fr; gap: 28px; align-items: center; background: #fff; border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); border-left: 8px solid var(--hg); transition: transform .25s; }
+.hotel-card:hover { transform: translateY(-4px); }
+.hotel-logo { background: #fff; border-radius: 50%; display: flex; }
+.hotel-logo img { width: 100%; height: auto; display: block; border-radius: 50%; }
+.hotel-info { display: flex; flex-direction: column; gap: 6px; }
+.hotel-info h3 { font-family: "Forum", var(--serif); font-size: 34px; color: var(--hg); font-weight: 400; }
+.hotel-card .more { color: var(--hb); }
+.pilot { display: inline-block; align-self: flex-start; background: var(--hb); color: #fff; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 5px 12px; border-radius: 999px; margin-bottom: 6px; }
+.soon { margin-top: 24px; }
+
+.hotel-hero { position: relative; padding: 130px 0 90px; background: linear-gradient(180deg, #f3f8ee, #fff); overflow: hidden; }
+.hotel-hero-in { display: grid; grid-template-columns: 1fr 340px; gap: 40px; align-items: center; position: relative; z-index: 2; }
+.hotel-hero h1 { font-family: "Forum", var(--serif); font-weight: 400; font-size: clamp(48px, 8vw, 96px); color: var(--hg); letter-spacing: .02em; text-transform: uppercase; margin-top: 10px; }
+.hotel-sub { color: var(--hb); font-weight: 800; letter-spacing: .14em; text-transform: uppercase; margin-top: 6px; }
+.hotel-lead { font-size: 20px; max-width: 540px; margin: 18px 0 28px; }
+.hotel-actions { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+.btn.brand { background: var(--hg); box-shadow: 0 8px 20px rgba(92,147,64,.4); }
+.back-d { display: block; color: var(--hb); font-weight: 800; margin-bottom: 16px; }
+.hotel-logo.big { filter: drop-shadow(0 20px 30px rgba(90,58,28,.18)); }
+.pines { position: absolute; left: 0; right: 0; bottom: 0; height: 80px; z-index: 1; }
+.pines i { position: absolute; bottom: 0; width: 34px; background: var(--hg); opacity: .16; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.hotel-page .eyebrow.brand { color: var(--hb); }
+.hotel-page .section h2, .hotel-page .benefit h3 { color: var(--hg); }
+.hotel-page .benefit.hl { background: #f6faf2; border-top: 5px solid var(--hb); box-shadow: none; }
+.hotel-page .lead button { background: var(--hg); box-shadow: 0 8px 20px rgba(92,147,64,.4); }
+.hotel-page .num { background: var(--hb); }
+@media (max-width: 760px) {
+  .hotel-card { grid-template-columns: 1fr; }
+  .hotel-card .hotel-logo { max-width: 180px; }
+  .hotel-hero-in { grid-template-columns: 1fr; }
+  .hotel-logo.big { max-width: 240px; order: -1; }
+}

@@ -6,7 +6,8 @@ import HeroArt from "@/components/HeroArt";
 import Reveal from "@/components/Reveal";
 import Scene from "@/components/Scene";
 import { ArticleCard } from "@/components/JournalList";
-import { destinations, hotTours, benefits, reviews, stats, steps, places, articles, fmt } from "@/lib/data";
+import HotelCard from "@/components/HotelCard";
+import { hotels, destinations, hotTours, benefits, reviews, stats, steps, places, articles, fmt } from "@/lib/data";
 
 const cats = [["/destinations/abkhazia", "🌊 Море"], ["/#abkhazia", "⛰️ Горы"], ["/#hot", "🔥 Горящие"], ["/destinations/turkey", "🍹 Всё включено"], ["/journal", "📖 Журнал"]];
 const marq = ["Абхазия", "Турция", "Египет", "ОАЭ", "Таиланд", "Мальдивы", "Сочи"];
@@ -80,6 +81,11 @@ export default function Home() {
             ))}
           </div>
         </div>
+      </section>
+
+      <section id="catalog" className="section container">
+        <Reveal className="sec-head"><span className="eyebrow">Каталог отелей</span><h2>Отели, в которых мы уверены</h2></Reveal>
+        <div className="hotel-list">{hotels.map((h) => <HotelCard key={h.slug} h={h} />)}</div>
       </section>
 
       <section id="abkhazia" className="section container">
