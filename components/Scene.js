@@ -8,7 +8,7 @@ export default function Scene({ kind = "coast", c1 = "#ffb347", c2 = "#0b3b4a", 
     <svg className={`scene ${className}`} viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>
         <linearGradient id={`g${id}`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor={c2} />
+          <stop offset="0" stopColor={c1} />
           <stop offset=".7" stopColor={c1} />
           <stop offset="1" stopColor="#fff3dc" />
         </linearGradient>
