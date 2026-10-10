@@ -44,7 +44,7 @@ export default function Scene({ kind = "coast", c1 = "#ffb347", c2 = "#0b3b4a", 
         </>
       )}
       {(kind === "palm" || kind === "beach" || kind === "lagoon") && (
-        <g stroke="#0d2b1d" strokeLinecap="round" fill="none" opacity=".9" transform="translate(250 0)">
+        <g stroke="#0b3b4a" strokeLinecap="round" fill="none" opacity=".9" transform="translate(250 0)">
           <path d="M92 210 Q98 160 86 118" strokeWidth="5" />
           <path d="M86 118 Q60 100 38 116 M86 118 Q70 90 48 88 M86 118 Q110 96 134 108 M86 118 Q104 86 128 80" strokeWidth="4" />
         </g>

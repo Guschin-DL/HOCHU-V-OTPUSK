@@ -26,7 +26,7 @@ export default function Header() {
     <header className={`header ${solid || light ? "solid" : ""} ${open ? "open" : ""}`}>
       <div className="container header-in">
         <Link href="/" className="logo" onClick={() => setOpen(false)}>
-          <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#ff7a59" /><path d="M5 21q5.5-6 11 0t11 0" stroke="#fff" strokeWidth="2.4" fill="none" strokeLinecap="round" /><circle cx="21" cy="11" r="3.4" fill="#ffd166" /></svg>
+          <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#ff7a3d" /><path d="M5 21q5.5-6 11 0t11 0" stroke="#fff" strokeWidth="2.4" fill="none" strokeLinecap="round" /><circle cx="21" cy="11" r="3.4" fill="#ffb02e" /></svg>
           <span>Хочу на отдых</span>
         </Link>
         <nav className="nav" onClick={() => setOpen(false)}>
