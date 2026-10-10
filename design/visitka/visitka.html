@@ -6,6 +6,8 @@
 html,body{width:96.4mm;background:#fbf5ea;font-family:Inter,'Liberation Sans',sans-serif}
 /* 90x50 мм + вылеты 3 мм; логотип 88 мм шириной (1 px = 0.08 мм) */
 .card{width:96.4mm;height:56.2mm;position:relative;overflow:hidden;background:#fbf5ea}
+.halo{position:absolute;left:25.2mm;top:26.6mm;width:78mm;height:78mm;transform:translate(-50%,-50%);border-radius:50%;
+ background:radial-gradient(circle,rgba(46,181,184,.30) 0,rgba(205,238,234,.62) 40%,rgba(253,227,196,.40) 62%,rgba(251,245,234,0) 100%);filter:blur(2.5mm)}
 .card img{position:absolute;left:4.2mm;top:5.8mm;width:88mm;display:block}
 .t{position:absolute;left:50.6mm;white-space:nowrap}
 .tag{top:6.2mm;font-weight:800;font-size:4.3mm;line-height:1.18;color:#0f3b4c}
@@ -14,6 +16,7 @@ html,body{width:96.4mm;background:#fbf5ea;font-family:Inter,'Liberation Sans',sa
 .site{top:46.4mm;font-weight:700;font-size:3.6mm;color:#2eb5b8}
 </style></head><body>
 <section class="card">
+  <div class="halo"></div>
   <img src="logo.png" alt="Хочу на отдых">
   <div class="t tag">Пусть <b>папа</b> и <b>мама</b><br>знают</div>
   <div class="t phone">+7 (965) 2000-701</div>
