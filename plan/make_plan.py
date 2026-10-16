@@ -127,10 +127,10 @@ def page_summary(pdf, png):
      ("5. Что проверить на месте", 14, "b"),
      ("• Эскиз нарисован не в масштабе — приняты подписанные размеры: 6,0 · 5,3 · 2,10 · 2,74 · 2,2 · 2,5 · 2,3 м.", 10, "r"),
      ("• Глубина нижнего выступа справа (≈ 0,7 м), положение окон и двери — оценка по рисунку.", 10, "r"),
-     ("• Проём 2,10 м в левом нижнем углу зала нужно закрыть перегородкой.", 10, "r"),
+     ("• В нижней стене левого угла есть дверной проём ≈ 0,9 м в соседнее помещение: на вариантах А/Б стена показана сплошной (проём заложить).", 10, "r"),
      ("• Подключение света брендинга к электросети — согласовать с арендодателем и администрацией.", 10, ""),
      ("", 8, ""),
-     ("Страницы: 2 — план помещения · 3 — вариант А · 4 — вариант Б", 10, "g"),
+     ("Страницы: 2 — полный план по эскизу · 3 — план ПВЗ с размерами · 4 — вариант А · 5 — вариант Б", 10, "g"),
     ]
     y = 1.0
     for t, fs, st in L:
@@ -138,6 +138,97 @@ def page_summary(pdf, png):
         ax.text(0, y, t, fontsize=fs, color=col, fontweight="bold" if st == "b" or fs == 20 else "normal", va="top")
         y -= (fs * 0.0019 + 0.0045)
     pdf.savefig(fig); fig.savefig(png, dpi=110); plt.close(fig)
+
+
+def page_full(pdf, png):
+    """Полный план по эскизу: все помещения и все подписи с рисунка."""
+    fig, ax = plt.subplots(figsize=(11.7, 16.5))
+    ax.set_aspect("equal"); ax.set_xlim(-4.4, 8.6); ax.set_ylim(16.6, -3.2); ax.axis("off")
+    Y2 = 12.4            # вторая линия простенков (оценка)
+    L2W, L2D = 2.70, 2.81
+    CAB_Y, CAB_D, KOT_D = D + STRIP + T, 2.7, 4.0
+    # --- контекст ---
+    rect(ax, -3.1, 0, 3.1, 15.6, "#f0f0f0", ec="#999", lw=0.8, z=0, hatch="\\\\")
+    txt(ax, -1.55, 8.0, "СКЛАД\n(соседнее\nпомещение)", 11, "#666", bbox=dict(fc="white", ec="none", pad=2))
+    ax.text(-3.55, 5.0, "УЛИЦА + ПАРКОВКА", fontsize=11, color="#666", rotation=90, ha="center", va="center")
+    rect(ax, -3.1, -2.1, 5.4, 2.1, "#e6e6e6", ec="#888", lw=0.8, z=1, hatch="///")
+    txt(ax, -0.4, -1.5, "ТАМБУР", 13, "#444", bbox=dict(fc="white", ec="none", pad=2))
+    # красный контур = ПВЗ
+    poly = room_polygon()
+    ax.add_patch(Polygon(poly, fc="#fdecec", ec="#d32f2f", lw=2.2, zorder=1))
+    # ---- стены ----
+    def W_(x, y, w, h): rect(ax, x, y, w, h, WALL, ec=WALL, z=4)
+    W_(-3.3, -0.2, 3.1 + W + 3.5 + 0.2 - 3.5, T) if False else None
+    W_(-T, -T, W + 2 * T, T)                       # фасад
+    W_(-T, 0, T, 15.61)                            # левая стена
+    W_(W, 0, T, 13.6 + T)                          # правая
+    W_(A, 0, T, F1); W_(X2, 0, T, F2)              # простенки
+    W_(A, D, T, 5.8)                               # левая стена кармана (5,8 снаружи)
+    W_(X2, D, T, 5.8)                              # правая стена кармана
+    W_(A, D + ALC, B + 2 * T, T)                   # низ кармана
+    W_(-T, D, 0.6 + T, T); W_(1.5, D, A + T - 1.5, T)         # простенки с проёмом 0,9 (верхняя линия)
+    W_(-T, Y2, 0.6 + T, T); W_(1.5, Y2, 2.7 - 1.5 + T, T)     # нижняя линия простенков
+    W_(A, D + 5.8, T, Y2 - D - 5.8 + T)            # продолжение стены (оценка)
+    W_(L2W, Y2, T, L2D + 0.4)                      # правая стена нижней комнаты
+    W_(-T, Y2 + 0.2 + L2D, L2W + 2 * T, T)         # низ
+    W_(X2 + T, D + STRIP, W - X2 - T + T, T)       # низ выступа / верх кабинета
+    W_(X2 + T, CAB_Y + CAB_D, W - X2 - T + T, T)   # между кабинетом и котельной
+    W_(X2 + T, CAB_Y + CAB_D + T + KOT_D, W - X2 - T + T, T)   # низ котельной
+    W_(X2 + T, D + 5.8, T, 13.6 - D - 5.8 + 0.2) if False else None
+    W_(X2, D + 5.8, T, 13.8 - D - 5.8)             # левая стена котельной
+    # кабинет и котельная
+    rect(ax, X2 + T, CAB_Y, W - X2 - T, CAB_D, "#f4f4f4", ec="none", z=1)
+    rect(ax, X2 + T, CAB_Y + CAB_D + T, W - X2 - T, KOT_D, "#ececec", ec="none", z=1)
+    ax.text(6.35, CAB_Y + CAB_D / 2, "кабинет\n(столовая)", fontsize=10, rotation=90, ha="center", va="center", zorder=10)
+    ax.text(6.35, CAB_Y + CAB_D + T + KOT_D / 2, "котельная", fontsize=10, rotation=90, ha="center", va="center", zorder=10)
+    # левая колонка
+    rect(ax, 0, D + T, A, Y2 - D - T, "#f7f7f7", ec="none", z=1)
+    rect(ax, 0, Y2 + T, L2W, L2D, "#f7f7f7", ec="none", z=1)
+    # окна
+    rect(ax, 3.15, -T, 1.2, T, "#9fd3ff", ec="#1565c0", z=5); txt(ax, 3.75, -0.5, "окно", 8, "#1565c0")
+    rect(ax, W, 4.35, T, 0.95, "#9fd3ff", ec="#1565c0", z=5); ax.text(W + 0.55, 4.83, "окно", fontsize=8, color="#1565c0", rotation=90, ha="center", va="center")
+    rect(ax, W, CAB_Y + 0.8, T, 0.7, "#9fd3ff", ec="#1565c0", z=5); ax.text(W + 0.55, CAB_Y + 1.15, "окно", fontsize=8, color="#1565c0", rotation=90, ha="center", va="center")
+    # двери: вход ПВЗ, дверь тамбура с улицы, кабинет, низ
+    rect(ax, DOOR[0], -T, DOOR[1] - DOOR[0], T, "white", ec="white", z=5)
+    ax.plot([DOOR[0], DOOR[0] + 0.7], [0, -0.7], color="#333", lw=1.4, zorder=6)
+    ax.plot([-3.1, -3.1], [-1.9, -0.9], color="white", lw=4, zorder=5)
+    ax.plot([-3.1, -2.4], [-0.9, -1.5], color="#333", lw=1.4, zorder=6)
+    ax.annotate("", (1.25, 0.7), (-2.9, -1.0), arrowprops=dict(arrowstyle="->", color="#d32f2f", lw=1.6, connectionstyle="angle,angleA=0,angleB=90,rad=0"), zorder=9)
+    txt(ax, -2.0, -0.5, "вход с улицы", 7, "#d32f2f")
+    rect(ax, 6.7, D + STRIP - 0.01, 0.6, T + 0.02, "white", ec="white", z=5)
+    ax.plot([6.7, 6.2], [D + STRIP, D + STRIP + 0.55], color="#333", lw=1.2, zorder=6)
+    for (x0, x1, yy) in [(0.6, 1.5, D), (0.6, 1.5, Y2)]:
+        rect(ax, x0, yy - 0.01, x1 - x0, T + 0.02, "white", ec="white", z=5)
+        txt(ax, (x0 + x1) / 2, yy + 0.1, "проём", 5.5, "#555")
+    rect(ax, 0.6, Y2 + 0.2 + L2D - 0.01, 1.1, T + 0.02, "white", ec="white", z=5)
+    ax.plot([0.6, 1.15, 1.7], [Y2 + 0.2 + L2D + 0.2, Y2 + 0.2 + L2D + 0.35, Y2 + 0.2 + L2D + 0.2], color="#333", lw=1.2, zorder=6)
+    txt(ax, 1.15, Y2 + 0.2 + L2D + 0.65, "дверь/ворота", 6, "#555")
+    # --- размеры и надписи с эскиза ---
+    dim(ax, -3.1, -2.45, 2.3, -2.45, "5,40")
+    dim(ax, 2.0, -2.1, 2.0, -0.05, "2,10")
+    dim(ax, 0, 0.35, A, 0.35, "2,10м")
+    dim(ax, X1, 0.35, X2, 0.35, "2,74м")
+    dim(ax, X2 + T, 0.35, W, 0.35, "2,2")
+    dim(ax, 1.95, 0.0, 1.95, F1, "2,5м", c="#555")
+    dim(ax, 5.35, 0.0, 5.35, F2, "2,30", c="#555")
+    dim(ax, -0.55, 0, -0.55, D, "6,0м")
+    dim(ax, X1, 8.5, X2, 8.5, "2,7")
+    dim(ax, X1 + 0.3, D, X1 + 0.3, D + ALC, "5,3")
+    dim(ax, A - 0.4, D, A - 0.4, D + 5.8, "5,8", c="#555")
+    dim(ax, 0, 9.0, A, 9.0, "2,10")
+    dim(ax, 0, Y2 + 1.6, L2W, Y2 + 1.6, "2,70")
+    dim(ax, L2W - 0.4, Y2 + T, L2W - 0.4, Y2 + T + L2D, "2,81")
+    dim(ax, X2 + T, CAB_Y + CAB_D + 0.0, W, CAB_Y + CAB_D + 0.0, "2,2", c="#555") if False else None
+    dim(ax, 5.55, D, 5.55, D + STRIP, "2,2?", c="#b00020")
+    txt(ax, 3.7, 3.4, "ПВЗ (красный контур)\n≈ 59,7 м²", 13, "#d32f2f")
+    txt(ax, 1.05, 3.0, "", 1)
+    txt(ax, 1.05, 10.2, "вне ПВЗ", 8, "#777")
+    txt(ax, 1.35, 14.4, "вне ПВЗ", 8, "#777")
+    ax.set_title("Заявка 544512 · Шеверняево, Северная ул., 30 — ПЛАН ПО ЭСКИЗУ (все помещения и подписи)\n"
+                 "Красный контур — помещение под ПВЗ. Размеры без «~» взяты с эскиза.", fontsize=11, loc="left")
+    fig.text(0.02, 0.012, "Без размера на эскизе (оценка): глубина выступа 0,7 · кабинет ~2,7 · котельная ~4,0 · длина левой комнаты · положение окон и дверей. "
+             "Подпись «5,3/5,8» может оказаться «3,3/3,8» — проверьте!", fontsize=8, color="#b00020")
+    pdf.savefig(fig); fig.savefig(png, dpi=130); plt.close(fig)
 
 
 def page_plan(pdf, png):
@@ -353,6 +444,7 @@ if __name__ == "__main__":
     here = os.path.dirname(os.path.abspath(__file__))
     with PdfPages(os.path.join(here, "PVZ_544512_plan.pdf")) as pdf:
         page_summary(pdf, os.path.join(here, "0_opisanie.png"))
+        page_full(pdf, os.path.join(here, "1a_polnyi_plan_po_eskizu.png"))
         total, *_ = page_plan(pdf, os.path.join(here, "1_plan_pomeshcheniya.png"))
         client = page_furn(pdf, os.path.join(here, "2_rasstanovka_mebeli.png"), total)
         page_furn_b(pdf, os.path.join(here, "3_rasstanovka_variant_B.png"), total)
