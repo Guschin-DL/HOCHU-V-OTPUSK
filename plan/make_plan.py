@@ -197,6 +197,91 @@ def furniture(ax):
     txt(ax, 3.7, 1.15, "ЗОНА РЕШЕНИЯ\nсвободно", 8, "#999")
 
 
+def furniture_b(ax):
+    """Вариант Б: стойка перед складом (на месте тарных ящиков), склад позади, примерочные у стены склада."""
+    for (x, y, w, h) in [(A, PART_Y, T, D - PART_Y), (X2, PART_Y, T, D - PART_Y)]:
+        rect(ax, x, y, w, h, NEW, ec=NEW, z=4)
+    rect(ax, X1, PART_Y, B, 0.1, NEW, ec=NEW, z=4)
+    # дверь на склад 0,95 в перегородке, открывается к оператору
+    rect(ax, 2.75, PART_Y - 0.02, 0.95, 0.14, "white", ec="white", z=5)
+    ax.add_patch(Arc((2.75, PART_Y), 1.9, 1.9, theta1=270, theta2=360, ec="#555", lw=0.7, ls="--", zorder=6))
+    ax.plot([2.75, 2.75 + 0.95], [PART_Y, PART_Y - 0.0], color="#555", lw=0.1, zorder=6)
+    ax.plot([2.75, 2.75], [PART_Y, PART_Y - 0.95], color="#555", lw=1.2, zorder=6)
+    txt(ax, 3.2, 3.62, "дверь на склад 0,95", 5.5, "#555")
+    rect(ax, X1, PART_Y + 0.1, B, D + ALC - PART_Y - 0.1, "#d6ecf7", ec="none", z=2)
+    txt(ax, 3.67, 9.5, "СКЛАД\n20,0 м²", 11, "#1b6f99")
+    # стеллажи: запад 6, восток 7 (4 — товары продавцов), юг 1
+    sh = [(X1, 5.0 + i, 0.4, 1.0, False) for i in range(6)]
+    sh += [(X2 - 0.4, 4.0 + i, 0.4, 1.0, i >= 3) for i in range(7)]
+    sh.append((2.70, 10.9, 1.0, 0.4, False))
+    for (x, y, w, h, seller) in sh:
+        rect(ax, x, y, w, h, "#ffd54f" if seller else "#b0bec5", ec="#37474f", lw=0.7, z=6)
+    txt(ax, X2 - 0.2, 7.5, "товары\nпродавцов", 5.5, "#6d4c00", rotation=90, z=11)
+    rect(ax, 3.75, 4.05, 0.85, 0.9, "#efebe9", ec="#6d4c00", lw=0.6, z=6, ls="--")
+    txt(ax, 4.17, 4.5, "тарные\nящики", 5.5)
+    rect(ax, 3.75, 10.4, 0.85, 0.85, "#efebe9", ec="#6d4c00", lw=0.6, z=6, ls="--")
+    txt(ax, 4.18, 10.82, "инвентарь", 5)
+    txt(ax, 3.35, 8.0, "проход 1,94 м", 6.5, "#0b3d91", rotation=90)
+    # ресепшен перед складом: стойка 0,9 + модуль 0,5, оператор позади (1,0 м)
+    rect(ax, 3.2, 2.3, 0.9, 0.6, "#ffffff", ec="k", lw=1.2, z=7)
+    txt(ax, 3.65, 2.6, "стойка 0,9×0,6", 5.5)
+    rect(ax, 4.1, 2.3, 0.5, 0.6, "#ffffff", ec="k", lw=1.2, z=7)
+    txt(ax, 4.35, 2.6, "прист.", 5)
+    ax.plot([4.6, 5.04], [2.6, 2.6], color="#555", lw=1.2, ls=":", zorder=7)
+    txt(ax, 4.85, 2.3, "ограждение\n/калитка", 5, "#555")
+    ax.add_patch(Circle((3.9, 3.35), 0.23, fc="#7b1f3a", ec="k", zorder=7))
+    dim(ax, 3.2, 2.9, 3.2, 3.9, "1,0", c="#2e7d32")
+    dim(ax, 2.3, 2.6, 3.2, 2.6, "0,9", c="#2e7d32")
+    txt(ax, 3.65, 1.95, "очередь", 6, "#999")
+    rect(ax, 3.5, PART_Y - 0.09, 1.5, 0.09, "#e91e8c", ec="none", z=7)
+    txt(ax, 4.75, 3.55, "обои «Зебра»+лого", 5, "#e91e8c", z=11)
+    # стол проверки у левой стены
+    rect(ax, 0, 2.6, 0.6, 1.0, "#ffffff", ec="k", lw=1.2, z=7)
+    txt(ax, 0.3, 3.1, "стол\nпроверки\n1×0,6", 5, rotation=90)
+    rect(ax, 0, 1.6, 0.6, 1.0, "none", ec="#777", lw=0.9, z=7, ls="--")
+    txt(ax, 0.3, 2.1, "2-й стол\n(опц.)", 5, "#777", rotation=90)
+    txt(ax, 0.05, 3.85, "розетка 220 В", 5.5, "#b00020", ha="left")
+    rect(ax, 0, 2.6, 0.05, 1.0, "#e91e8c", ec="none", z=8)
+    # примерочные: спиной к стене склада, шторы на восток
+    rect(ax, 5.24, 3.95, 1.2, 2.44, "#ffffff", ec="k", lw=1.2, z=7)
+    ax.plot([5.24, 6.44], [5.17, 5.17], color="k", lw=0.8, zorder=8)
+    ax.plot([6.44, 6.44], [3.95, 6.39], color="#333", lw=2.5, zorder=8)
+    txt(ax, 5.84, 4.56, "примерочная 1\n1,22×1,2", 5.5, z=11)
+    txt(ax, 5.84, 5.78, "примерочная 2\n1,22×1,2", 5.5, z=11)
+    rect(ax, 6.44, 3.95, 0.9, 2.44, "#dbe9ff", ec="none", z=2)
+    txt(ax, 6.9, 3.65, "подход ≥ 0,9", 5.5, "#0b3d91")
+    # зона ожидания в левом нижнем углу: скамейка + зеркало
+    rect(ax, 0, 4.7, 0.38, 0.78, "#9e9e9e", ec="k", lw=0.8, z=7)
+    txt(ax, 0.9, 5.1, "скамья\n0,78×0,38", 5.5)
+    rect(ax, 0.3, D - 0.1, 0.8, 0.1, "#cfe8ff", ec="k", lw=0.8, z=7)
+    txt(ax, 0.7, 5.75, "зеркало 0,8", 5.5)
+    # обои «Баллон» рядом с примерочными
+    rect(ax, W - 0.07, 0.4, 0.07, 1.3, "#7e57c2", ec="none", z=7)
+    txt(ax, 7.1, 1.05, "обои\n«Баллон»", 5.5, "#7e57c2", rotation=90)
+    rect(ax, 6.7, D + STRIP - 0.01, 0.6, T + 0.02, "white", ec="white", z=5)
+    txt(ax, 6.65, 7.3, "дверь в кабинет\n(для персонала)", 5.5, "#555")
+    for (x, y, sname) in [(1.6, 3.4, "камера\nзал"), (3.67, 7.4, "камера\nсклад")]:
+        ax.add_patch(Circle((x, y), 0.14, fc="#d32f2f", ec="k", zorder=8))
+        txt(ax, x + 0.5, y, sname, 5, "#d32f2f", ha="left")
+    dim(ax, 1.25, 0.0, 1.25, 2.3, "вход → стойка", c="#2e7d32")
+    txt(ax, 3.7, 0.9, "ЗОНА РЕШЕНИЯ\nсвободно", 8, "#999")
+    txt(ax, 6.4, 1.0, "", 5)
+
+
+def page_furn_b(pdf, png, total):
+    fig, ax = plt.subplots(figsize=(11.7, 16.5))
+    base(ax)
+    furniture_b(ax)
+    ax.set_title("Заявка 544512 · Шеверняево, Северная ул., 30 — РАССТАНОВКА, ВАРИАНТ Б\n"
+                 "Стойка перед складом (вместо тарных ящиков), склад позади, примерочные у стены склада",
+                 fontsize=11, loc="left")
+    part = 0.2 * (D - PART_Y) * 2 + 0.1 * B
+    client = total - B * (D + ALC - PART_Y - 0.1) - part
+    fig.text(0.02, 0.012, f"Всего ≈ {total:.1f} м² · склад ≈ 20,0 м² · клиентская зона ≈ {client:.1f} м² · "
+             "стеллажей 14 (рекоменд. для L: от 17) · примерочных 2 · проходы ≥ 0,9 м", fontsize=8, color="#333")
+    pdf.savefig(fig); fig.savefig(png, dpi=130); plt.close(fig)
+
+
 def page_furn(pdf, png, total):
     fig, ax = plt.subplots(figsize=(11.7, 16.5))
     base(ax)
@@ -218,4 +303,5 @@ if __name__ == "__main__":
     with PdfPages(os.path.join(here, "PVZ_544512_plan.pdf")) as pdf:
         total, *_ = page_plan(pdf, os.path.join(here, "1_plan_pomeshcheniya.png"))
         client = page_furn(pdf, os.path.join(here, "2_rasstanovka_mebeli.png"), total)
+        page_furn_b(pdf, os.path.join(here, "3_rasstanovka_variant_B.png"), total)
     print(f"total={total:.1f} client={client:.1f}")
