@@ -1,6 +1,7 @@
 import opentype from 'opentype.js';
 import fs from 'fs';
 import QRCode from 'qrcode';
+import { cat2, paw, sparkle, plane } from './lib2.mjs';
 
 const load = (pkg, subset, w) => { const b = fs.readFileSync(`node_modules/@fontsource/${pkg}/files/${pkg}-${subset}-${w}-normal.woff`); return opentype.parse(b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength)); };
 const F = { 900: [load('nunito', 'cyrillic', 900), load('nunito', 'latin', 900)], 800: [load('nunito', 'cyrillic', 800), load('nunito', 'latin', 800)] };
@@ -28,39 +29,54 @@ const svgWrap = (body, title) => `<svg xmlns="http://www.w3.org/2000/svg" viewBo
 // ---------- Оборот: календарь 2027 + QR ----------
 function back() {
   const qr = QRCode.create(URL_, { errorCorrectionLevel: 'M' });
-  const n = qr.modules.size, m = 18 / n; let qd = '';
-  for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (qr.modules.get(r, c)) qd += `M${r3(8 + c * m)} ${r3(17 + r * m)}h${r3(m)}v${r3(m)}h${r3(-m)}z`;
+  const n = qr.modules.size, QS = 17.6, m = QS / n, QX = 8.2, QY = 20.4; let qd = '';
+  for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (qr.modules.get(r, c)) qd += `M${r3(QX + c * m)} ${r3(QY + r * m)}h${r3(m)}v${r3(m)}h${r3(-m)}z`;
   const holidays = new Set(['1-1','1-2','1-3','1-4','1-5','1-6','1-7','1-8','2-23','3-8','5-1','5-9','6-12','11-4']);
   const MN = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+  // сезонные «язычки» месяцев: зима, весна, лето, осень
+  const SEAS = [['#2bb3b5', K.ink], ['#2bb3b5', K.ink], ['#ffb02e', K.ink], ['#ffb02e', K.ink], ['#ffb02e', K.ink], ['#ff7a3d', K.ink], ['#ff7a3d', K.ink], ['#ff7a3d', K.ink], [K.ink, '#fbf5ea'], [K.ink, '#fbf5ea'], [K.ink, '#fbf5ea'], ['#2bb3b5', K.ink]];
   const WD = ['П','В','С','Ч','П','С','В'];
   const mdays = (mo) => new Date(2027, mo + 1, 0).getDate();
   let out = '';
-  const x0 = 32, y0 = 5, cw = 14.25, rh = 14.67, pitch = cw / 7;
+  const x0 = 32, y0 = 5, cw = 14.25, rh = 14.67, pitch = (cw - 0.5) / 7, pw = cw - 0.5;
   for (let mo = 0; mo < 12; mo++) {
-    const X = x0 + (mo % 4) * cw, Y = y0 + Math.floor(mo / 4) * rh;
-    out += `<path d="${run(900, MN[mo], 1.75, X + 0.15, Y + 1.75).d}" fill="${K.ink}"/>`;
-    out += `<rect x="${X + 0.15}" y="${Y + 2.25}" width="${cw - 0.7}" height="0.18" fill="${K.coral}"/>`;
+    const X = x0 + (mo % 4) * cw, Y = y0 + Math.floor(mo / 4) * rh, [pill, pillText] = SEAS[mo];
+    // выходные: мягкие колонки
+    out += `<rect x="${r3(X + 0.15 + 5 * pitch)}" y="${Y + 3.15}" width="${r3(2 * pitch)}" height="10.75" rx="0.5" fill="#f4e6cd"/>`;
+    out += `<rect x="${X + 0.15}" y="${Y + 0.1}" width="${pw}" height="2.55" rx="1.27" fill="${pill}"/>`;
+    out += `<path d="${run(900, MN[mo], 1.62, X + 0.85, Y + 1.9).d}" fill="${pillText}"/>`;
     let hd = '';
-    WD.forEach((w, i) => { const wd = run(800, w, 1.15, 0, 0); hd += run(800, w, 1.15, X + 0.15 + i * pitch + (pitch - wd.width) / 2, Y + 3.9).d; });
+    WD.forEach((w, i) => { const wd = run(800, w, 1.1, 0, 0); hd += run(800, w, 1.1, X + 0.15 + i * pitch + (pitch - wd.width) / 2, Y + 4.25).d; });
     out += `<path d="${hd}" fill="${K.muted}"/>`;
-    const first = (new Date(2027, mo, 1).getDay() + 6) % 7; // Пн = 0
-    let dayD = '', offD = '';
+    const first = (new Date(2027, mo, 1).getDay() + 6) % 7;
+    let dayD = '', offD = '', holD = '';
     for (let d = 1; d <= mdays(mo); d++) {
       const idx = first + d - 1, col = idx % 7, row = Math.floor(idx / 7);
-      const off = col >= 5 || holidays.has(`${mo + 1}-${d}`);
-      const s = String(d), wd = run(800, s, 1.3, 0, 0).width;
-      const p = run(800, s, 1.3, X + 0.15 + col * pitch + (pitch - wd) / 2, Y + 5.5 + row * 1.5).d;
-      if (off) offD += p; else dayD += p;
+      const wk = col >= 5, hol = holidays.has(`${mo + 1}-${d}`);
+      const s2 = String(d), wd = run(800, s2, 1.3, 0, 0).width;
+      const px = X + 0.15 + col * pitch + (pitch - wd) / 2, py = Y + 5.95 + row * 1.5;
+      const p = run(800, s2, 1.3, px, py).d;
+      if (wk || hol) offD += p; else dayD += p;
+      if (hol && !wk) holD += `<circle cx="${r3(X + 0.15 + col * pitch + pitch / 2)}" cy="${r3(py + 0.42)}" r="0.2" fill="${K.coralInk}"/>`;
     }
-    out += `<path d="${dayD}" fill="${K.ink}"/><path d="${offD}" fill="${K.coralInk}"/>`;
+    out += `<path d="${dayD}" fill="${K.ink}"/><path d="${offD}" fill="${K.coralInk}"/>${holD}`;
   }
-  const year = run(900, '2027', 7.4, 5, 12.6, 0);
+  // левая колонка: 2027 + самолёт, коты над карточкой с QR
+  const year = run(900, '2027', 5.7, 5, 10.1, 0);
   const t1 = run(800, 'Наведи камеру', 1.75, 0, 0), t2 = run(800, 'и выбери отдых', 1.75, 0, 0), u = run(900, SHOW_URL, 1.95, 0, 0);
   const cx = 17;
-  const t1p = run(800, 'Наведи камеру', 1.75, cx - t1.width / 2, 38.8).d, t2p = run(800, 'и выбери отдых', 1.75, cx - t2.width / 2, 41.4).d, up = run(900, SHOW_URL, 1.95, cx - u.width / 2, 45.8).d;
+  const t1p = run(800, 'Наведи камеру', 1.75, cx - t1.width / 2, 41.5).d, t2p = run(800, 'и выбери отдых', 1.75, cx - t2.width / 2, 44.0).d, up = run(900, SHOW_URL, 1.95, cx - u.width / 2, 47.5).d;
+  const PT = [26.3, 5.1], EDGE = 16.9;
+  const cats = [
+    cat2({ x: 10.2, y: EDGE - 0.6, r: 2.55, fur: '#ffb02e', stripe: '#d98a00', mouth: 'smile', glassesUp: 'rgba(11,59,74,.9)', target: PT }),
+    cat2({ x: 24.6, y: EDGE - 0.7, r: 2.9, fur: '#fff3e0', mouth: 'o', target: PT }),
+    cat2({ x: 17.2, y: EDGE - 1.05, r: 3.5, fur: '#ff7a3d', stripe: '#c95420', mouth: 'o', target: PT }),
+  ].join('');
+  const paws = paw(8.4, EDGE + 0.05, 1.25, '#ffb02e') + paw(12.2, EDGE + 0.05, 1.25, '#ffb02e') + paw(14.5, EDGE + 0.1, 1.55, '#ff7a3d') + paw(19.9, EDGE + 0.1, 1.55, '#ff7a3d') + paw(22.6, EDGE + 0.05, 1.3, '#fff3e0') + paw(26.6, EDGE + 0.05, 1.3, '#fff3e0');
+  const flight = `<path d="M${r3(5 + year.width + 1.3)} 7.6Q22 6.2 25 5.7" fill="none" stroke="${K.teal}" stroke-width="0.28" stroke-dasharray="0.05 0.75" stroke-linecap="round"/>${plane(K.ink, 0.062, -16, 26.9, 5.1)}${sparkle(30.2, 4.3, 0.15, K.coral)}${sparkle(22.4, 3.3, 0.1, K.teal)}`;
   return svgWrap(`<rect width="94" height="54" fill="${K.cream}"/>
-    <path d="${year.d}" fill="${K.coral}"/>
-    <rect x="5" y="14" width="24" height="35" rx="2.2" fill="${K.white}"/>
+    <path d="${year.d}" fill="${K.coral}"/>${flight}${cats}
+    <rect x="5" y="${EDGE}" width="24" height="${49 - EDGE}" rx="2.4" fill="${K.white}"/>${paws}
     <path d="${qd}" fill="${K.ink}"/>
     <path d="${t1p}${t2p}" fill="${K.ink}"/><path d="${up}" fill="${K.teal}"/>
     ${out}`, 'Календарик 2027, оборот: календарь и QR-код на сайт');
@@ -85,7 +101,9 @@ function front() {
   const s2 = fit(900, 'на отдых', 36), b = run(900, 'на отдых', s2, tx, 28.6 + s2 * 0.88, -0.2);
   const tg = run(800, 'ТУРЫ ДЛЯ ВСЕЙ СЕМЬИ', 1.55, tx + 0.2, 38.4, 0.55);
   const ph = run(900, PHONE, 3.15, tx, 44.2), ur = run(900, SHOW_URL, 3.1, tx, 48.4);
-  return svgWrap(`<rect width="94" height="54" fill="${K.cream}"/>${emblem}
+  const glow = `<circle cx="24" cy="27" r="26.5" fill="#ffe9bd" opacity=".75"/><circle cx="24" cy="27" r="23.2" fill="#fff3d6" opacity=".9"/>`;
+  const sp = sparkle(43.2, 6.6, 0.2, K.coral) + sparkle(3.6, 47, 0.16, K.teal) + sparkle(91.2, 6.2, 0.14, K.teal) + sparkle(44.6, 49.5, 0.12, K.coral);
+  return svgWrap(`<rect width="94" height="54" fill="${K.cream}"/>${glow}${emblem}${sp}
     <path d="${hd[K.ink]}" fill="${K.ink}"/><path d="${hd[K.coral]}" fill="${K.coral}"/><path d="${know.d}" fill="${K.ink}"/>
     <path d="${a.d}" fill="${K.coral}"/><path d="${b.d}" fill="${K.ink}"/><path d="${tg.d}" fill="${K.teal}"/>
     <path d="${ph.d}" fill="${K.coral}"/><path d="${ur.d}" fill="${K.teal}"/>`, 'Календарик 2027, лицо: Хочу на отдых');
