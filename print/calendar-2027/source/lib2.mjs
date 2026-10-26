@@ -60,7 +60,7 @@ export const cat = ({ x, y, r, fur, stripe, cheek = '#ff7a59', inner = '#ffb4a2'
 };
 
 // Кот v2: смотрит на точку (tx,ty), варианты рта, очки на лбу, брови
-export const cat2 = ({ x, y, r, fur, stripe, target, mouth = 'w', glassesUp = null, ink = '#0b3b4a', cheek = '#ff7a59', inner = '#ffb4a2' }) => {
+export const cat2 = ({ x, y, r, fur, stripe, target, mouth = 'w', glassesUp = null, wk = null, ink = '#0b3b4a', cheek = '#ff7a59', inner = '#ffb4a2' }) => {
   const dx = target[0] - x, dy = target[1] - y, L = Math.hypot(dx, dy) || 1, ox = (dx / L) * 0.12 * r, oy = (dy / L) * 0.12 * r;
   const ear = (sx) => `<path d="M${sx * 0.9 * r} ${-0.15 * r}L${sx * 0.82 * r} ${-1.22 * r}L${sx * 0.16 * r} ${-0.86 * r}Z" fill="${fur}" stroke="${fur}" stroke-width="${r * 0.14}" stroke-linejoin="round"/>
     <path d="M${sx * 0.7 * r} ${-0.4 * r}L${sx * 0.67 * r} ${-1.0 * r}L${sx * 0.32 * r} ${-0.8 * r}Z" fill="${inner}" stroke="${inner}" stroke-width="${r * 0.05}" stroke-linejoin="round"/>`;
@@ -75,7 +75,7 @@ export const cat2 = ({ x, y, r, fur, stripe, target, mouth = 'w', glassesUp = nu
   return `<g transform="translate(${x} ${y})">${ear(-1)}${ear(1)}<ellipse rx="${r}" ry="${0.92 * r}" fill="${fur}"/>${str}${gl}
     <ellipse cx="${-0.66 * r}" cy="${0.3 * r}" rx="${0.18 * r}" ry="${0.115 * r}" fill="${cheek}" opacity=".5"/><ellipse cx="${0.66 * r}" cy="${0.3 * r}" rx="${0.18 * r}" ry="${0.115 * r}" fill="${cheek}" opacity=".5"/>
     ${eye(-1)}${eye(1)}<path d="M${-0.07 * r} ${0.17 * r}L${0.07 * r} ${0.17 * r}L0 ${0.27 * r}Z" fill="${cheek}"/>${m}
-    <g stroke="${ink}" stroke-width="${r * 0.025}" stroke-linecap="round" opacity=".6"><path d="M${-0.74 * r} ${0.22 * r}L${-1.22 * r} ${0.12 * r}M${-0.74 * r} ${0.32 * r}L${-1.2 * r} ${0.38 * r}M${0.74 * r} ${0.22 * r}L${1.22 * r} ${0.12 * r}M${0.74 * r} ${0.32 * r}L${1.2 * r} ${0.38 * r}"/></g></g>`;
+    <g stroke="${ink}" stroke-width="${wk ?? r * 0.025}" stroke-linecap="round" opacity="${wk ? 1 : .6}"><path d="M${-0.74 * r} ${0.22 * r}L${-1.22 * r} ${0.12 * r}M${-0.74 * r} ${0.32 * r}L${-1.2 * r} ${0.38 * r}M${0.74 * r} ${0.22 * r}L${1.22 * r} ${0.12 * r}M${0.74 * r} ${0.32 * r}L${1.2 * r} ${0.38 * r}"/></g></g>`;
 };
 export const paw = (x, y, w, fur, ink = '#0b3b4a') => `<g transform="translate(${x} ${y})"><ellipse rx="${w}" ry="${w * 0.62}" fill="${fur}"/><path d="M${-w * 0.3} ${w * 0.05}V${w * 0.4}M${w * 0.3} ${w * 0.05}V${w * 0.4}" stroke="${ink}" stroke-width="${w * 0.07}" stroke-linecap="round" opacity=".35"/></g>`;
 export const sparkle = (x, y, s, fill) => `<path transform="translate(${x} ${y}) scale(${s})" d="M0-10Q1.5-1.5 10 0Q1.5 1.5 0 10Q-1.5 1.5-10 0Q-1.5-1.5 0-10Z" fill="${fill}"/>`;

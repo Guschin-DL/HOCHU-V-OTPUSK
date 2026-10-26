@@ -21,7 +21,7 @@ function run(w, str, size, x, y, tr = 0) {
 }
 const widthOf = (w, s, size, tr = 0) => run(w, s, size, 0, 0, tr).width;
 const fit = (w, s, target, tr = 0) => target / widthOf(w, s, 100, tr) * 100;
-const K = { ink: '#0b3b4a', coral: '#ff7a3d', coralInk: '#e0551f', teal: '#2bb3b5', cream: '#fbf5ea', white: '#ffffff', muted: '#7a8f96' };
+const K = { ink: '#0b3b4a', coral: '#ff7a3d', coralInk: '#b83c12', teal: '#2bb3b5', cream: '#fbf5ea', white: '#ffffff', muted: '#4a6068', tealInk: '#17808a', tealDeep: '#0f6f78' };
 const URL_ = 'https://xn--80aizdcydohn4c.xn--p1ai';
 const SHOW_URL = 'хочунаотдых.рф', PHONE = '+7 (965) 2000-701';
 const svgWrap = (body, title) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 94 54" width="94mm" height="54mm" role="img" aria-label="${title}"><title>${title}</title>${body}</svg>`;
@@ -42,20 +42,20 @@ function back() {
   for (let mo = 0; mo < 12; mo++) {
     const X = x0 + (mo % 4) * cw, Y = y0 + Math.floor(mo / 4) * rh, [pill, pillText] = SEAS[mo];
     // выходные: мягкие колонки
-    out += `<rect x="${r3(X + 0.15 + 5 * pitch)}" y="${Y + 3.15}" width="${r3(2 * pitch)}" height="10.75" rx="0.5" fill="#f4e6cd"/>`;
+    out += `<rect x="${r3(X + 0.15 + 5 * pitch)}" y="${Y + 3.1}" width="${r3(2 * pitch)}" height="11.1" rx="0.5" fill="#f4e6cd"/>`;
     out += `<rect x="${X + 0.15}" y="${Y + 0.1}" width="${pw}" height="2.55" rx="1.27" fill="${pill}"/>`;
     out += `<path d="${run(900, MN[mo], 1.62, X + 0.85, Y + 1.9).d}" fill="${pillText}"/>`;
     let hd = '';
-    WD.forEach((w, i) => { const wd = run(800, w, 1.1, 0, 0); hd += run(800, w, 1.1, X + 0.15 + i * pitch + (pitch - wd.width) / 2, Y + 4.25).d; });
+    WD.forEach((w, i) => { const wd = run(800, w, 1.15, 0, 0); hd += run(800, w, 1.15, X + 0.15 + i * pitch + (pitch - wd.width) / 2, Y + 4.2).d; });
     out += `<path d="${hd}" fill="${K.muted}"/>`;
     const first = (new Date(2027, mo, 1).getDay() + 6) % 7;
     let dayD = '', offD = '', holD = '';
     for (let d = 1; d <= mdays(mo); d++) {
       const idx = first + d - 1, col = idx % 7, row = Math.floor(idx / 7);
       const wk = col >= 5, hol = holidays.has(`${mo + 1}-${d}`);
-      const s2 = String(d), wd = run(800, s2, 1.3, 0, 0).width;
-      const px = X + 0.15 + col * pitch + (pitch - wd) / 2, py = Y + 5.95 + row * 1.5;
-      const p = run(800, s2, 1.3, px, py).d;
+      const s2 = String(d), wd = run(800, s2, 1.4, 0, 0).width;
+      const px = X + 0.15 + col * pitch + (pitch - wd) / 2, py = Y + 5.75 + row * 1.58;
+      const p = run(800, s2, 1.4, px, py).d;
       if (wk || hol) offD += p; else dayD += p;
       if (hol && !wk) holD += `<circle cx="${r3(X + 0.15 + col * pitch + pitch / 2)}" cy="${r3(py + 0.42)}" r="0.2" fill="${K.coralInk}"/>`;
     }
@@ -68,9 +68,9 @@ function back() {
   const t1p = run(800, 'Наведи камеру', 1.75, cx - t1.width / 2, 41.5).d, t2p = run(800, 'и выбери отдых', 1.75, cx - t2.width / 2, 44.0).d, up = run(900, SHOW_URL, 1.95, cx - u.width / 2, 47.5).d;
   const PT = [26.3, 5.1], EDGE = 16.9;
   const cats = [
-    cat2({ x: 10.2, y: EDGE - 0.6, r: 2.55, fur: '#ffb02e', stripe: '#d98a00', mouth: 'smile', glassesUp: 'rgba(11,59,74,.9)', target: PT }),
-    cat2({ x: 24.6, y: EDGE - 0.7, r: 2.9, fur: '#fff3e0', mouth: 'o', target: PT }),
-    cat2({ x: 17.2, y: EDGE - 1.05, r: 3.5, fur: '#ff7a3d', stripe: '#c95420', mouth: 'o', target: PT }),
+    cat2({ x: 10.2, y: EDGE - 0.6, r: 2.55, fur: '#ffb02e', stripe: '#d98a00', mouth: 'smile', glassesUp: 'rgba(11,59,74,.9)', wk: 0.14, target: PT }),
+    cat2({ x: 24.6, y: EDGE - 0.7, r: 2.9, fur: '#fff3e0', mouth: 'o', wk: 0.14, target: PT }),
+    cat2({ x: 17.2, y: EDGE - 1.05, r: 3.5, fur: '#ff7a3d', stripe: '#c95420', mouth: 'o', wk: 0.14, target: PT }),
   ].join('');
   const paws = paw(8.4, EDGE + 0.05, 1.25, '#ffb02e') + paw(12.2, EDGE + 0.05, 1.25, '#ffb02e') + paw(14.5, EDGE + 0.1, 1.55, '#ff7a3d') + paw(19.9, EDGE + 0.1, 1.55, '#ff7a3d') + paw(22.6, EDGE + 0.05, 1.3, '#fff3e0') + paw(26.6, EDGE + 0.05, 1.3, '#fff3e0');
   const flight = `<path d="M${r3(5 + year.width + 1.3)} 7.6Q22 6.2 25 5.7" fill="none" stroke="${K.teal}" stroke-width="0.28" stroke-dasharray="0.05 0.75" stroke-linecap="round"/>${plane(K.ink, 0.062, -16, 26.9, 5.1)}${sparkle(30.2, 4.3, 0.15, K.coral)}${sparkle(22.4, 3.3, 0.1, K.teal)}`;
@@ -78,7 +78,7 @@ function back() {
     <path d="${year.d}" fill="${K.coral}"/>${flight}${cats}
     <rect x="5" y="${EDGE}" width="24" height="${49 - EDGE}" rx="2.4" fill="${K.white}"/>${paws}
     <path d="${qd}" fill="${K.ink}"/>
-    <path d="${t1p}${t2p}" fill="${K.ink}"/><path d="${up}" fill="${K.teal}"/>
+    <path d="${t1p}${t2p}" fill="${K.ink}"/><path d="${up}" fill="${K.tealInk}"/>
     ${out}`, 'Календарик 2027, оборот: календарь и QR-код на сайт');
 }
 
@@ -97,16 +97,16 @@ function front() {
   let off2 = 0; hd = {};
   segs.forEach(([s, col]) => { const r = run(800, s, hs, tx + off2, 9.4); hd[col] = (hd[col] || '') + r.d; off2 += r.width; });
   const know = run(800, 'знают', hs, tx, 9.4 + hs * 1.18);
-  const s1 = fit(900, 'Хочу', 29), a = run(900, 'Хочу', s1, tx - 0.4, 28.6, -0.3);
+  const s1 = fit(900, 'Хочу', 29), a = run(900, 'Хочу', s1, tx - 0.4, 28.1, -0.3);
   const s2 = fit(900, 'на отдых', 36), b = run(900, 'на отдых', s2, tx, 28.6 + s2 * 0.88, -0.2);
-  const tg = run(800, 'ТУРЫ ДЛЯ ВСЕЙ СЕМЬИ', 1.55, tx + 0.2, 38.4, 0.55);
+  const tg = run(800, 'ТУРЫ ДЛЯ ВСЕЙ СЕМЬИ', 1.72, tx + 0.2, 38.8, 0.42);
   const ph = run(900, PHONE, 3.15, tx, 44.2), ur = run(900, SHOW_URL, 3.1, tx, 48.4);
   const glow = `<circle cx="24" cy="27" r="26.5" fill="#ffe9bd" opacity=".75"/><circle cx="24" cy="27" r="23.2" fill="#fff3d6" opacity=".9"/>`;
-  const sp = sparkle(43.2, 6.6, 0.2, K.coral) + sparkle(3.6, 47, 0.16, K.teal) + sparkle(91.2, 6.2, 0.14, K.teal) + sparkle(44.6, 49.5, 0.12, K.coral);
+  const sp = sparkle(43.2, 6.6, 0.2, K.coral) + sparkle(44.6, 48.6, 0.12, K.coral);
   return svgWrap(`<rect width="94" height="54" fill="${K.cream}"/>${glow}${emblem}${sp}
     <path d="${hd[K.ink]}" fill="${K.ink}"/><path d="${hd[K.coral]}" fill="${K.coral}"/><path d="${know.d}" fill="${K.ink}"/>
-    <path d="${a.d}" fill="${K.coral}"/><path d="${b.d}" fill="${K.ink}"/><path d="${tg.d}" fill="${K.teal}"/>
-    <path d="${ph.d}" fill="${K.coral}"/><path d="${ur.d}" fill="${K.teal}"/>`, 'Календарик 2027, лицо: Хочу на отдых');
+    <path d="${a.d}" fill="${K.coral}"/><path d="${b.d}" fill="${K.ink}"/><path d="${tg.d}" fill="${K.tealDeep}"/>
+    <path d="${ph.d}" fill="${K.coral}"/><path d="${ur.d}" fill="${K.tealInk}"/>`, 'Календарик 2027, лицо: Хочу на отдых');
 }
 const OUT = process.argv[2];
 fs.mkdirSync(OUT, { recursive: true });
