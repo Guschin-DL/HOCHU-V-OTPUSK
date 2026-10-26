@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import LeadForm from "@/components/LeadForm";
-import { hotTours, fmt } from "@/lib/data";
+import Scene from "@/components/Scene";
+import { hotTours, fmt, sceneFor } from "@/lib/data";
 
 export function generateStaticParams() {
   return hotTours.map((t) => ({ id: String(t.id) }));
@@ -12,9 +13,10 @@ export default async function TourPage({ params }) {
   if (!t) notFound();
   return (
     <>
-      <section className="hero" style={{ background: `linear-gradient(160deg, ${t.color}, #1e3799)` }}>
+      <section className="page-hero scenic">
+        <Scene kind={sceneFor(t).kind} c1={sceneFor(t).color} c2={sceneFor(t).c2} />
         <div className="container">
-          <span className="em">{t.emoji}</span>
+          <span className="eyebrow">Тур</span>
           <h1>{t.hotel}</h1>
           <p>{t.country}, {t.resort} · {"★".repeat(t.stars)}</p>
         </div>

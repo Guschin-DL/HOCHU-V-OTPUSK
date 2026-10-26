@@ -9,7 +9,7 @@ export default function SearchForm() {
     <form className="search" onSubmit={onSubmit}>
       <label>Куда
         <select name="country" defaultValue="">
-          <option value="">Любое направление</option>
+          <option value="">Куда угодно</option>
           {destinations.map((d) => <option key={d.slug}>{d.name}</option>)}
         </select>
       </label>
